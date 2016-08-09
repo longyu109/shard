@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration>
+	<classPathEntry
+		location="/Users/nali/Documents/maven/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar" />
+
+	<ibatorContext id="context">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test" userId="root"
+			password="123456" />
+		<javaModelGenerator targetPackage="com.ly.shard.ibatis.model"
+			targetProject="shard" />
+		<sqlMapGenerator targetPackage="ibatis" targetProject="shard" />
+		<daoGenerator targetPackage="com.ly.shard.ibatis.dao"
+			targetProject="shard" type="SPRING" />
+		<table schema="" tableName="tb_passport">
+		</table>
+	</ibatorContext>
+</ibatorConfiguration>
+

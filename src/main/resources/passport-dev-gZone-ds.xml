@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	default-lazy-init="false">
+
+	<bean id="passport" class="com.alipay.zdal.client.config.bean.ZdalAppBean">
+		<property name="appName" value="passport" />
+		<property name="dbmode" value="dev" />
+		<property name="idcName" value="gZone" />
+		<property name="appDataSourceList">
+			<list>
+				<ref bean="passportDataSource" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="passportDataSource" class="com.alipay.zdal.client.config.bean.AppDataSourceBean">
+		<property name="appDataSourceName" value="passportDataSource" />
+		<property name="dataBaseType" value="MYSQL" />
+		<property name="configType" value="SHARD" />
+		<property name="appRule" ref="testRule" />
+		<property name="zoneError" value="EXCEPTION" />
+		<property name="physicalDataSourceSet">
+			<set>
+				<ref bean="testphysics" />
+			</set>
+		</property>
+		<property name="elasticDataSourceRuleMap">
+			<map>
+				<entry key="group_0" value="testphysics:r1w1" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="testphysics"
+		class="com.alipay.zdal.client.config.bean.PhysicalDataSourceBean">
+		<property name="name" value="master_0" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="userName" value="root" />
+		<property name="password" value="123456" />
+		<property name="minConn" value="1" />
+		<property name="maxConn" value="10" />
+		<property name="blockingTimeoutMillis" value="180" />
+		<property name="idleTimeoutMinutes" value="180" />
+		<property name="preparedStatementCacheSize" value="100" />
+		<property name="queryTimeout" value="180" />
+		<property name="prefill" value="true" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="connectionProperties">
+			<map>
+				<entry key="connectTimeout" value="500" />
+				<entry key="autoReconnect" value="true" />
+				<entry key="initialTimeout" value="1" />
+				<entry key="maxReconnects" value="2" />
+				<entry key="socketTimeout" value="5000" />
+				<entry key="failOverReadOnly" value="false" />
+			</map>
+		</property>
+	</bean>
+	<import resource="classpath:passport-dev-gZone-rule.xml"/>
+</beans>
