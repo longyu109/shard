@@ -20,13 +20,13 @@ public class TestDao {
 	
 	@Test
 	public void test(){
-		long uid=1;
+		long uid=2;
 		TbPassport record=new TbPassport();
 		record.setUid(uid);
-		record.setEmail("123@126.com");
-		record.setAccount("123");
-		record.setmPhone("123");
-		record.setPassword("123");
+		record.setEmail("longyu1215@126.com");
+		record.setAccount("longyu");
+		record.setmPhone("13404169490");
+		record.setPassword("123456");
 		record.setActived(false);
 		record.setCreateTime(new Date());
 		record.setIsRobot(false);
@@ -36,6 +36,13 @@ public class TestDao {
 		record.setUserType(0);
 		
 		tbPasswordDAO.insert(record);
+	}
+	
+	@Test
+	public void testQuery(){
+		long uid=1;
+		TbPassport selectByPrimaryKey = tbPasswordDAO.selectByPrimaryKey(uid);
+		System.out.println(selectByPrimaryKey);
 	}
 		
 

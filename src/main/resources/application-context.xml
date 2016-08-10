@@ -60,7 +60,7 @@
 
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:sqlmap-config.xml" />
-		<property name="dataSource" ref="dbDataSource" />
+		<property name="dataSource" ref="zdalDataSource" />
 	</bean>
 	<bean id="sqlMap" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
 		<property name="sqlMapClient" ref="sqlMapClient" />
